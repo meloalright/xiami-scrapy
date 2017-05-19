@@ -76,7 +76,7 @@ class XiamiSpider(scrapy.Spider):
              @ 朗读第一个
             '''
             if index < 3:
-                print('热评: {0} \n{1} {2} {3}\n'.format(comment, user, device, date))
+                print('{0} \n{1} {2} {3}\n'.format(comment, user, device, date))
 
             index += 1
             row = sheet1.row(index)
