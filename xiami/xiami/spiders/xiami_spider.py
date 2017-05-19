@@ -9,9 +9,16 @@ class XiamiSpider(scrapy.Spider):
     name = 'xiami'
     allowed_domain = ['xiami.com']
     start_urls = [
-        'http://www.xiami.com/song/xL8lVE9d1aa',
-        'http://www.xiami.com/song/8GjydGf1fd0',
-        'http://www.xiami.com/song/xL7hNId982e'
+        'http://www.xiami.com/song/U55CSj2ca18',#mine
+        'http://www.xiami.com/song/xL7hNId982e',#shake it off
+        'http://www.xiami.com/song/xLoG03af13c',#back to december
+        'http://www.xiami.com/song/OMZ5622d8',#last christmas
+        'http://www.xiami.com/song/xLoG02d8685',#speak now
+        'http://www.xiami.com/song/mQ3HBX5ec82',#echanted
+        'http://www.xiami.com/song/xL8lVE9d1aa',#blank space
+        'http://www.xiami.com/song/mQ3HBQ7aecc',#sparks fly
+        'http://www.xiami.com/song/dCfw32c7fa',#red
+        'http://www.xiami.com/song/Up7o77a3c'#love story
     ]
 
 
@@ -64,6 +71,13 @@ class XiamiSpider(scrapy.Spider):
             device = device[0].extract() if len(device) > 0 else '未知终端'# 容错
             date = o.xpath('div[@class="info"]/span[@class="time"]/node()')[0].extract()
 
+
+            '''
+             @ 朗读第一个
+            '''
+            if index < 3:
+                print('热评: {0} \n{1} {2} {3}\n'.format(comment, user, device, date))
+
             index += 1
             row = sheet1.row(index)
             row.write(0, comment)
@@ -80,6 +94,8 @@ class XiamiSpider(scrapy.Spider):
 
         excelname = dir + title + '.xls'
         excel.save(excelname)
+        print('{0} 的评论下载成功啦\n'.format(title))
+        os.system('say {0}'.format(title))
 
 
 
